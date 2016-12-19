@@ -21,6 +21,7 @@ dist/
 node_modules/
 tmp/
 temp/
+typings/
 hooks/
 platforms/
 plugins/
