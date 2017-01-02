@@ -1,10 +1,10 @@
-<ion-header>
-    <ion-navbar color="secondary" no-border-bottom>
+<ion-header no-border>
+    <ion-navbar color="secondary">
       <ion-title>
         Todos
       </ion-title>
       <ion-buttons end>
-        <button (click)="createTodo()"><ion-icon name="cloud-upload"></ion-icon></button>
+        <button ion-button icon-only (click)="createTodo()"><ion-icon name="cloud-upload"></ion-icon></button>
       </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -17,10 +17,10 @@
           {{todo.title}}
         </ion-item>
         <ion-item-options>
-          <button ion-button color="light" (click)="updateTodo(todo)">
+          <button ion-button icon-only color="light" (click)="updateTodo(todo)">
             <ion-icon name="create"></ion-icon>
           </button>
-          <button ion-button color="primary" (click)="deleteTodo(todo)">
+          <button ion-button icon-only color="primary" (click)="deleteTodo(todo)">
             <ion-icon name="checkmark"></ion-icon>
           </button>
         </ion-item-options>

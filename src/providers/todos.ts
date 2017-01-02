@@ -1,7 +1,4 @@
-
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import PouchDB from 'pouchdb';
 
 @Injectable()
@@ -11,7 +8,7 @@ export class Todos {
   db: any;
   remote: any;
 
-  constructor(private http: Http) {
+  constructor() {
 
     this.db = new PouchDB('todos');
 
