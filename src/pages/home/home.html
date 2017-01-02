@@ -10,7 +10,9 @@
 </ion-header>
 
 <ion-content class="home">
-
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list no-lines>
       <ion-item-sliding *ngFor="let todo of todos">
         <ion-item>
