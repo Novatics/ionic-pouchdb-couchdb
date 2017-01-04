@@ -1,6 +1,6 @@
 Offline sync com Ionic + PouchDB + CouchDB
 =====
->> O tutorial a seguir é imensamente baseado no post em [Offline Syncing in Ionic 2 with
+> O tutorial a seguir é imensamente baseado no post em [Offline Syncing in Ionic 2 with
 PouchDB & CouchDB](http://www.joshmorony.com/offline-syncing-in-ionic-2-with-pouchdb-couchdb/).
 
 Olá pessoal, hoje vamos falar sobre sincronização offline(_offline-sinc_) com
@@ -42,7 +42,9 @@ Vá ao site do próprio CouchDB e siga as instruções de instalação. É bem s
 basta fazer o download, extrair e executar a aplicação.
 
 - [CouchDB](http://couchdb.apache.org/)
+
     Após iniciar o CouchDB, acesse
+    
     ```bash
     http://127.0.0.1:5984/_utils/
     ```
@@ -50,6 +52,7 @@ basta fazer o download, extrair e executar a aplicação.
     ```bash
     http://localhost:5984/_utils/
     ```
+    
     para conferir que está rodando.  
     Procure pela opção de **Create database** e crie uma database com o nome
     "todos" que usaremos para nossos testes.
@@ -59,19 +62,19 @@ Começando a aplicação
 1. **Inicie a aplicação utilizando o template **blank**, versão 2 do Ionic e
    arquivos typescript**
 
-    >> `ionic start ionic-offline blank --v2 --ts`
+    > `ionic start ionic-offline blank --v2 --ts`
 
 2. **Mude para dentro do diretório criado**
 
-    >> `cd ionic-offline`
+    > `cd ionic-offline`
 
 3. **Instale o PouchDB no projeto**
 
-    >> `npm install pouchdb --save`
+    > `npm install pouchdb --save`
 
 4. **Instale a biblioteca de typings**
 
-    >> `npm install -g typings`
+    > `npm install -g typings`
 
     Lib necessária para a inclusão do código Javascript diretamente nos arquivos
     Typescript.
@@ -87,7 +90,7 @@ Começando a aplicação
 6. **Resolvendo problema de
    [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)**
 
-    >> `npm install -g add-cors-to-couchdb`
+    > `npm install -g add-cors-to-couchdb`
 
     Normalmente, ao interagir com o CouchDB, deve ocorrer problemas de
     [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
@@ -96,7 +99,7 @@ Começando a aplicação
 
 7. **Execute o seguinte comando com o CouchDB rodando**
 
-    >> `add-cors-to-couchdb`
+    > `add-cors-to-couchdb`
 
     Se tudo correu corretamente, deverá aparecer uma mensagem de `success`.
 
@@ -159,7 +162,7 @@ aplicação.
 
 Crie um _provider_ para fazer a interface com o nosso banco de dados:
 
->> ionic g provider Todos
+> ionic g provider Todos
 
 Modifique o arquivo gerado em **src/providers/todos.ts**:
 
@@ -176,9 +179,7 @@ export class Todos {
   remote: any;
  
   constructor() {
- 
     this.db = new PouchDB('todos');
- 
     this.remote = 'http://localhost:5984/todos';
  
     let options = {
@@ -188,29 +189,22 @@ export class Todos {
     };
  
     this.db.sync(this.remote, options);
- 
   }
  
   getTodos() {
-    
   }
  
   createTodo(todo){
-
   }
  
   updateTodo(todo){
-
   }
  
   deleteTodo(todo){
-
   }
  
   handleChange(change){
-    
   }
-
 }
 ```
 
@@ -228,19 +222,13 @@ Modifique a função **getTodos()**:
 
 ```typescript
 getTodos() {
- 
   if (this.data) {
     return Promise.resolve(this.data);
   }
- 
   return new Promise(resolve => {
- 
     this.db.allDocs({
- 
       include_docs: true
- 
     }).then((result) => {
- 
       this.data = [];
  
       let docs = result.rows.map((row) => {
@@ -248,19 +236,13 @@ getTodos() {
       });
  
       resolve(this.data);
- 
       this.db.changes({live: true, since: 'now', include_docs: true}).on('change', (change) => {
         this.handleChange(change);
       });
- 
     }).catch((error) => {
- 
       console.log(error);
- 
     }); 
- 
   });
- 
 }
 ```
 
@@ -282,32 +264,25 @@ handleChange(change){
   let changedIndex = null;
  
   this.data.forEach((doc, index) => {
- 
     if(doc._id === change.id){
       changedDoc = doc;
       changedIndex = index;
     }
- 
   });
  
-  //Documento deletado
   if(change.deleted){
+    //Documento deletado
     this.data.splice(changedIndex, 1);
   } 
   else {
- 
-    //Documento atualizado
     if(changedDoc){
+      //Documento atualizado
       this.data[changedIndex] = change.doc;
-    } 
- 
-    //Documento adicionado
-    else {
+    } else {
+      //Documento adicionado
       this.data.push(change.doc); 
     }
- 
   }
- 
 }
 ```
 
