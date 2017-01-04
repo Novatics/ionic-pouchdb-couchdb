@@ -1,20 +1,8 @@
-Ionic 2 App Base
-=====================
+Ionic 2 app + PouchDB + CouchDB
+=====
 
-This is the base template for Ionic 2 starter apps.
+Repository created for a simple todo-list app using Ionic 2 and PouchDB + CouchDB for offline-sync.
 
-## Using this project
+This code is immensely based on this post: [Offline Syncing in Ionic 2 with PouchDB & CouchDB](http://www.joshmorony.com/offline-syncing-in-ionic-2-with-pouchdb-couchdb/). Credits to the author.
 
-You'll need the Ionic CLI with support for v2 apps:
-
-```bash
-$ npm install -g ionic
-```
-
-Then run:
-
-```bash
-$ ionic start myApp
-```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/docs/v2/getting-started/) page.
+For Portuguese, check the [blog.md](https://github.com/Novatics/ionic-pouchdb-couchdb/blob/master/blog.md) file.
